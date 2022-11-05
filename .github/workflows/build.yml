@@ -17,8 +17,8 @@ jobs:
           ssh-keyscan github.com  >> ~/.ssh/known_hosts
           ssh-agent -a ${{ env.SSH_AUTH_SOCK }} > /dev/null
           ssh-add - <<< "${{ secrets.SSH_DEPLOY_KEY }}"
-          git config --global user.name "${{ GITHUB_ACTOR }}"
-          git config --global user.email "${{ GITHUB_ACTOR }}@segmentq.io"
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@segmentq.io"
       - name: Compile services by language
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
