@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package api;
+
+import "field.proto";
+
+option go_package = "github.com/segmentq/protos-api-go/index";
+
+message IndexDefinition {
+  repeated FieldDefinition fields = 2;
+}
+
+enum Status {
+  INDEX_STATUS_UNKNOWN = 0;
+  INDEX_STATUS_CREATING = 5;
+  INDEX_STATUS_ACTIVE = 10;
+  INDEX_STATUS_UPDATING = 15;
+  INDEX_STATUS_DELETING = 20;
+}
+
+message IndexMeta {
+  string primary_key = 1;
+  Status status = 2;
+  string created = 3;
+  string updated = 4;
+}
+
+// Requests
+
+message AddIndexRequest {
+  string name = 1;
+  string primary_key = 2;
+  IndexDefinition index = 3;
+}
+
+message AddIndexResponse {
+  string name = 1;
+  IndexMeta meta = 2;
+}
+
+message DescribeIndexRequest {
+  string name = 1;
+}
+
+message DescribeIndexResponse {
+  string name = 1;
+  IndexDefinition index = 2;
+  IndexMeta meta = 3;
+}
+
+message DeleteIndexRequest {
+  string name = 1;
+}
+
+message DeleteIndexResponse {
+  string name = 1;
+  IndexMeta meta = 2;
+}
+
+message ListIndexesRequest {
+  string pattern = 1;
+  string created_after = 2;
+  string created_before = 3;
+  string updated_after = 4;
+  string updated_before = 5;
+}
+
+message ListIndexesResponse {
+  repeated DescribeIndexResponse results = 1;
+}

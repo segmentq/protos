@@ -1,0 +1,10 @@
+name: Build
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    steps:
+      - name: Compile services by language
+        run: build.sh
