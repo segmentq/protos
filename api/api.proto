@@ -8,7 +8,7 @@ import "segment.proto";
 service IndexService {
   rpc AddIndex(AddIndexRequest) returns (AddIndexResponse);
   rpc DescribeIndex(DescribeIndexRequest) returns (DescribeIndexResponse);
-  //  rpc AlterIndex(AlterIndexRequest) returns (AlterIndexResponse);
+//  rpc AlterIndex(AlterIndexRequest) returns (AlterIndexResponse);
   rpc DeleteIndex(DeleteIndexRequest) returns (DeleteIndexResponse);
   rpc ListIndexes(ListIndexesRequest) returns (ListIndexesResponse);
 }
