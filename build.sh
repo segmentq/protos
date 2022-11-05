@@ -52,7 +52,7 @@ function buildProtoForTypes {
       setupBranch $REPOPATH/$reponame
 
       # Use the docker container for the language we care about and compile
-      docker run -v "$(pwd):/defs" namely/protoc-$lang
+      docker run -v "$(pwd):/defs" namely/protoc-$lang --with-docs markdown,DOCS.md --lint
 
       # Copy the generated files out of the pb-* path into the repository
       # that we care about
