@@ -5,6 +5,7 @@ on:
 
 jobs:
   build:
+    runs-on: ubuntu-latest
     steps:
       - name: Compile services by language
         run: build.sh
