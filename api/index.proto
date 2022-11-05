@@ -4,7 +4,7 @@ package api;
 
 import "field.proto";
 
-option go_package = "github.com/segmentq/protos-api-go/index";
+option go_package = "github.com/segmentq/protos-api-go/api";
 
 message IndexDefinition {
   repeated FieldDefinition fields = 2;
