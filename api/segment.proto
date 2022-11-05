@@ -166,6 +166,7 @@ message MatchSegmentResponse {
 message MatchSegmentKeyRequest {
   string index = 1;
   repeated SegmentField fields = 2;
+  string tmp = 3;
 }
 
 message MatchSegmentKeyResponse {
