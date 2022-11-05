@@ -45,10 +45,10 @@ function buildProtoForTypes {
 
       rm -rf "${REPOPATH:?}/$reponame"
 
-      echo "Cloning repo: git@github.com:$GITHUB_REPOSITORY_OWNER/$reponame.git"
+      echo "Cloning repo: https://github.com/$GITHUB_REPOSITORY_OWNER/$reponame.git"
 
       # Clone the repository down and set the branch to the automated one
-      git clone $GH_TOKEN@github.com:$GITHUB_REPOSITORY_OWNER/$reponame.git $REPOPATH/$reponame
+      git clone https://github.com/$GITHUB_REPOSITORY_OWNER/$reponame.git $REPOPATH/$reponame
       setupBranch $REPOPATH/$reponame
 
       # Use the docker container for the language we care about and compile
