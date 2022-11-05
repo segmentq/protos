@@ -9,7 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set git user
-        run: git config --global user.name "${GITHUB_ACTOR}"
+      - name: Setup SSH Keys and known_hosts
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan git.domainXXX  >> ~/.ssh/known_hosts
+          ssh-agent -a ${{ env.SSH_AUTH_SOCK }} > /dev/null
+          ssh-add - <<< "${{ secrets.SSH_DEPLOY_KEY }}"
       - name: Compile services by language
         run: bash ${GITHUB_WORKSPACE}/build.sh
