@@ -54,9 +54,14 @@ function buildProtoForTypes {
       # Use the docker container for the language we care about and compile
       docker run -v "$(pwd):/defs" namely/protoc-$lang --with-docs markdown,DOCS.md --lint
 
+      # We will also generate documentation
+      docker run -v "$(pwd):/out" -v "$(pwd):/protos" \
+        pseudomuto/protoc-gen-doc --doc_opt=markdown,DOCS.md
+
       # Copy the generated files out of the pb-* path into the repository
       # that we care about
       cp -R pb-$lang/* $REPOPATH/$reponame/
+      cp -R DOCS.md $REPOPATH/$reponame/
 
       commitAndPush $REPOPATH/$reponame
     done < .protolangs
