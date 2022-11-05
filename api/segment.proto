@@ -1,0 +1,173 @@
+syntax = "proto3";
+
+package api;
+
+message Segment {
+  repeated SegmentField fields = 1;
+}
+
+message SegmentField {
+  string name = 1;
+  oneof value {
+    SegmentFieldString string_value = 10;
+    SegmentFieldRepeatedString repeated_string_value = 11;
+
+    SegmentFieldInt int_value = 20;
+    SegmentFieldRepeatedInt repeated_int_value = 21;
+
+    SegmentFieldUInt uint_value = 30;
+    SegmentFieldRepeatedUInt repeated_uint_value = 31;
+
+    SegmentFieldFloat float_value = 40;
+    SegmentFieldRepeatedFloat repeated_float_value = 41;
+
+    SegmentFieldBool bool_value = 50;
+    SegmentFieldRepeatedBool repeated_bool_value = 51;
+
+    SegmentFieldBlob blob_value = 60;
+    SegmentFieldRepeatedBlob repeated_blob_value = 61;
+
+    SegmentFieldRangeInt range_int_value = 70;
+    SegmentFieldRepeatedRangeInt repeated_range_int_value = 71;
+
+    SegmentFieldRangeFloat range_float_value = 80;
+    SegmentFieldRepeatedRangeFloat repeated_range_float_value = 81;
+
+    SegmentFieldGeoPoint geo_point_value = 90;
+    SegmentFieldRepeatedGeoPoint repeated_geo_point_value = 91;
+
+    SegmentFieldGeoRect geo_rect_value = 100;
+    SegmentFieldRepeatedGeoRect repeated_geo_rect_value = 101;
+  }
+}
+
+message SegmentFieldString {
+  string value = 1;
+}
+
+message SegmentFieldRepeatedString {
+  repeated string value = 1;
+}
+
+message SegmentFieldInt {
+  int64 value = 1;
+}
+
+message SegmentFieldRepeatedInt {
+  repeated int64 value = 1;
+}
+
+message SegmentFieldUInt {
+  uint64 value = 1;
+}
+
+message SegmentFieldRepeatedUInt {
+  repeated uint64 value = 1;
+}
+
+message SegmentFieldFloat {
+  double value = 1;
+}
+
+message SegmentFieldRepeatedFloat {
+  repeated double value = 1;
+}
+
+message SegmentFieldBool {
+  bool value = 1;
+}
+
+message SegmentFieldRepeatedBool {
+  repeated bool value = 1;
+}
+
+message SegmentFieldBlob {
+  string value = 1;
+}
+
+message SegmentFieldRepeatedBlob {
+  repeated string value = 1;
+}
+
+message SegmentFieldRangeInt {
+  int64 min = 1;
+  int64 max = 2;
+}
+
+message SegmentFieldRepeatedRangeInt {
+  repeated SegmentFieldRangeInt value = 1;
+}
+
+message SegmentFieldRangeFloat {
+  double min = 1;
+  double max = 2;
+}
+
+message SegmentFieldRepeatedRangeFloat {
+  repeated SegmentFieldRangeFloat value = 1;
+}
+
+message SegmentFieldGeoPoint {
+  double x = 1;
+  double y = 2;
+}
+
+message SegmentFieldRepeatedGeoPoint {
+  repeated SegmentFieldGeoPoint value = 1;
+}
+
+message SegmentFieldGeoRect {
+  SegmentFieldGeoPoint top_left = 1;
+  SegmentFieldGeoPoint bottom_right = 2;
+}
+
+message SegmentFieldRepeatedGeoRect {
+  repeated SegmentFieldGeoRect value = 1;
+}
+
+// Requests
+
+message PutSegmentRequest {
+  string index = 1;
+  Segment segment = 2;
+}
+
+message PutSegmentResponse {
+  // Empty
+}
+
+message GetSegmentRequest {
+  string index = 1;
+  SegmentField key = 2; // Lookup on index primary key
+}
+
+message GetSegmentResponse {
+   Segment segment = 1;
+}
+
+message DeleteSegmentRequest {
+  string index = 1;
+  SegmentField key = 2; // Lookup on index primary key
+}
+
+message DeleteSegmentResponse {
+  // Empty
+}
+
+message MatchSegmentRequest {
+  string index = 1;
+  repeated SegmentField fields = 2;
+}
+
+message MatchSegmentResponse {
+  repeated Segment results = 1;
+}
+
+message MatchSegmentKeyRequest {
+  string index = 1;
+  repeated SegmentField fields = 2;
+}
+
+message MatchSegmentKeyResponse {
+  repeated SegmentField results = 1;
+}

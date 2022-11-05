@@ -1,0 +1,25 @@
+name: Build
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  compile:
+    name: Compile for all changed languages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup SSH Keys and known_hosts
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan github.com  >> ~/.ssh/known_hosts
+          ssh-agent -a ${{ env.SSH_AUTH_SOCK }} > /dev/null
+          ssh-add - <<< "${{ secrets.SSH_DEPLOY_KEY }}"
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@segmentq.io"
+      - name: Compile services by language
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: bash ${GITHUB_WORKSPACE}/build.sh

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package api;
+
+import "index.proto";
+import "segment.proto";
+
+service IndexService {
+  rpc AddIndex(AddIndexRequest) returns (AddIndexResponse);
+  rpc DescribeIndex(DescribeIndexRequest) returns (DescribeIndexResponse);
+  //  rpc AlterIndex(AlterIndexRequest) returns (AlterIndexResponse);
+  rpc DeleteIndex(DeleteIndexRequest) returns (DeleteIndexResponse);
+  rpc ListIndexes(ListIndexesRequest) returns (ListIndexesResponse);
+}
+
+service SegmentService {
+  rpc PutSegment(PutSegmentRequest) returns (PutSegmentResponse);
+  rpc GetSegment(GetSegmentRequest) returns (GetSegmentResponse);
+  rpc DeleteSegment(DeleteSegmentRequest) returns (DeleteSegmentResponse);
+  rpc MatchSegment(MatchSegmentRequest) returns (MatchSegmentResponse);
+  rpc MatchSegmentKey(MatchSegmentKeyRequest) returns (MatchSegmentKeyResponse);
+}
