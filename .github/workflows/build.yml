@@ -4,8 +4,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  compile:
+    name: Compile for all changed languages
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Compile services by language
         run: build.sh
