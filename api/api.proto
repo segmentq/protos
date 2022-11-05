@@ -5,8 +5,6 @@ package api;
 import "index.proto";
 import "segment.proto";
 
-option go_package = "github.com/segmentq/protos-api-go/api";
-
 service IndexService {
   rpc AddIndex(AddIndexRequest) returns (AddIndexResponse);
   rpc DescribeIndex(DescribeIndexRequest) returns (DescribeIndexResponse);
