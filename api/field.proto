@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package api;
 
+option go_package = "github.com/segmentq/protos-api-go/api";
+
 enum Field {
   FIELD_DEFINITION_UNDEFINED = 0;
   // STRINGs
