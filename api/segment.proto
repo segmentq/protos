@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package api;
 
+option go_package = "github.com/segmentq/protos-api-go/api";
+
 message Segment {
   repeated SegmentField fields = 1;
 }
