@@ -41,6 +41,7 @@ enum Field {
 message FieldDefinition {
   string name = 1;
   Field field = 2;
-  bool repeated = 3; // Allow arrays
-  repeated FieldDefinition fields = 4; // Allow nested structure
+  bool is_primary = 3;
+  bool repeated = 4; // Allow arrays
+  repeated FieldDefinition fields = 5; // Allow nested structure
 }

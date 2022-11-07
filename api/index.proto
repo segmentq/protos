@@ -5,10 +5,7 @@ package api;
 option go_package = "github.com/segmentq/protos-api-go/api";
 
 import "field.proto";
-
-message IndexDefinition {
-  repeated FieldDefinition fields = 2;
-}
+import "google/protobuf/timestamp.proto";
 
 enum Status {
   INDEX_STATUS_UNKNOWN = 0;
@@ -18,24 +15,23 @@ enum Status {
   INDEX_STATUS_DELETING = 20;
 }
 
-message IndexMeta {
-  string primary_key = 1;
+message IndexDefinition {
+  string name = 1;
   Status status = 2;
-  string created = 3;
-  string updated = 4;
+  repeated FieldDefinition fields = 3;
+  google.protobuf.Timestamp created = 4;
+  google.protobuf.Timestamp updated = 5;
+
 }
 
 // Requests
 
 message AddIndexRequest {
-  string name = 1;
-  string primary_key = 2;
-  IndexDefinition index = 3;
+  IndexDefinition index = 1;
 }
 
 message AddIndexResponse {
-  string name = 1;
-  IndexMeta meta = 2;
+  bool ok = 1;
 }
 
 message DescribeIndexRequest {
@@ -43,9 +39,7 @@ message DescribeIndexRequest {
 }
 
 message DescribeIndexResponse {
-  string name = 1;
-  IndexDefinition index = 2;
-  IndexMeta meta = 3;
+  IndexDefinition index = 1;
 }
 
 message DeleteIndexRequest {
@@ -53,16 +47,15 @@ message DeleteIndexRequest {
 }
 
 message DeleteIndexResponse {
-  string name = 1;
-  IndexMeta meta = 2;
+  IndexDefinition index = 1;
 }
 
 message ListIndexesRequest {
   string pattern = 1;
-  string created_after = 2;
-  string created_before = 3;
-  string updated_after = 4;
-  string updated_before = 5;
+  google.protobuf.Timestamp created_after = 2;
+  google.protobuf.Timestamp created_before = 3;
+  google.protobuf.Timestamp updated_after = 4;
+  google.protobuf.Timestamp updated_before = 5;
 }
 
 message ListIndexesResponse {
