@@ -62,7 +62,6 @@ function buildProtoForTypes {
       # Copy the generated files out of the pb-* path into the repository
       # that we care about
       cp -R gen/pb-$lang/* $REPOPATH/$reponame/
-      cp -R gen/doc/DOCS.md $REPOPATH/$reponame/
 
       commitAndPush $REPOPATH/$reponame
     done < .protolangs
