@@ -4,44 +4,50 @@ package api;
 
 option go_package = "github.com/segmentq/protos-api-go/api";
 
-enum Field {
-  FIELD_DEFINITION_UNDEFINED = 0;
+enum ScalarType {
+  DATA_TYPE_UNDEFINED = 0;
   // STRINGs
-  FIELD_DEFINITION_STRING = 10;
+  DATA_TYPE_STRING = 10;
   // INTs
-  FIELD_DEFINITION_INT = 20;
-  FIELD_DEFINITION_INT8 = 21;
-  FIELD_DEFINITION_INT16 = 22;
-  FIELD_DEFINITION_INT32 = 23;
-  FIELD_DEFINITION_INT64 = 24;
+  DATA_TYPE_INT = 20;
+  DATA_TYPE_INT8 = 21;
+  DATA_TYPE_INT16 = 22;
+  DATA_TYPE_INT32 = 23;
+  DATA_TYPE_INT64 = 24;
   // UINTs
-  FIELD_DEFINITION_UINT = 30;
-  FIELD_DEFINITION_UINT8 = 31;
-  FIELD_DEFINITION_UINT16 = 32;
-  FIELD_DEFINITION_UINT32 = 33;
-  FIELD_DEFINITION_UINT64 = 34;
+  DATA_TYPE_UINT = 30;
+  DATA_TYPE_UINT8 = 31;
+  DATA_TYPE_UINT16 = 32;
+  DATA_TYPE_UINT32 = 33;
+  DATA_TYPE_UINT64 = 34;
   // FLOATs
-  FIELD_DEFINITION_FLOAT = 40;
-  FIELD_DEFINITION_FLOAT32 = 41;
-  FIELD_DEFINITION_FLOAT64 = 42;
+  DATA_TYPE_FLOAT = 40;
+  DATA_TYPE_FLOAT32 = 41;
+  DATA_TYPE_FLOAT64 = 42;
   // BOOL
-  FIELD_DEFINITION_BOOL = 50;
+  DATA_TYPE_BOOL = 50;
   // BLOB
-  FIELD_DEFINITION_BLOB = 60;
+  DATA_TYPE_BLOB = 60;
+}
+
+enum GeoType {
   // RANGEs
-  FIELD_DEFINITION_RANGE = 70;
-  FIELD_DEFINITION_RANGE_INT = 71;
-  FIELD_DEFINITION_RANGE_FLOAT = 72;
+  DATA_TYPE_RANGE = 0;
+  DATA_TYPE_RANGE_INT = 1;
+  DATA_TYPE_RANGE_FLOAT = 2;
   // GEOs
-  FIELD_DEFINITION_GEO = 80;
-  FIELD_DEFINITION_GEO_RECT = 81;
-  FIELD_DEFINITION_GEO_POINT = 82;
+  DATA_TYPE_GEO = 10;
+  DATA_TYPE_GEO_RECT = 11;
+  DATA_TYPE_GEO_POINT = 12;
 }
 
 message FieldDefinition {
   string name = 1;
-  Field field = 2;
-  bool is_primary = 3;
-  bool repeated = 4; // Allow arrays
-  repeated FieldDefinition fields = 5; // Allow nested structure
+  oneof data_type {
+    ScalarType scalar = 2;
+    GeoType geo = 3;
+  }
+  bool is_primary = 4;
+  bool repeated = 5; // Allow arrays
+  repeated FieldDefinition fields = 6; // Allow nested structure
 }
