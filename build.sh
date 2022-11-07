@@ -55,6 +55,8 @@ function buildProtoForTypes {
       docker run -v "$(pwd):/defs" namely/protoc-all \
         --with-docs markdown,DOCS.md \
         --go-source-relative \
+        --with-validator \
+        --validator-source-relative \
         --lint \
         -d . \
         -l $lang
