@@ -6,6 +6,7 @@ option go_package = "github.com/segmentq/protos-api-go/api";
 
 import "index.proto";
 import "segment.proto";
+import "lookup.proto";
 
 service IndexService {
   rpc AddIndex(AddIndexRequest) returns (AddIndexResponse);
@@ -19,6 +20,6 @@ service SegmentService {
   rpc PutSegment(PutSegmentRequest) returns (PutSegmentResponse);
   rpc GetSegment(GetSegmentRequest) returns (GetSegmentResponse);
   rpc DeleteSegment(DeleteSegmentRequest) returns (DeleteSegmentResponse);
-  rpc MatchSegment(MatchSegmentRequest) returns (MatchSegmentResponse);
-  rpc MatchSegmentKey(MatchSegmentKeyRequest) returns (MatchSegmentKeyResponse);
+  rpc LookupSegment(LookupSegmentRequest) returns (LookupSegmentResponse);
+  rpc LookupSegmentKey(LookupSegmentKeyRequest) returns (LookupSegmentKeyResponse);
 }
