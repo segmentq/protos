@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "github.com/segmentq/protos-api-go/api";
+
+import "segment.proto";
+
+message Lookup {
+  repeated LookupField fields = 1;
+}
+
+message LookupField {
+  string name = 1;
+  oneof value {
+    SegmentFieldString string_value = 10;
+    SegmentFieldRepeatedString repeated_string_value = 11;
+
+    SegmentFieldInt int_value = 20;
+    SegmentFieldRepeatedInt repeated_int_value = 21;
+
+    SegmentFieldUInt uint_value = 30;
+    SegmentFieldRepeatedUInt repeated_uint_value = 31;
+
+    SegmentFieldFloat float_value = 40;
+    SegmentFieldRepeatedFloat repeated_float_value = 41;
+
+    SegmentFieldBool bool_value = 50;
+    SegmentFieldRepeatedBool repeated_bool_value = 51;
+
+    SegmentFieldRangeInt range_int_value = 70;
+    SegmentFieldRepeatedRangeInt repeated_range_int_value = 71;
+
+    SegmentFieldRangeFloat range_float_value = 80;
+    SegmentFieldRepeatedRangeFloat repeated_range_float_value = 81;
+
+    SegmentFieldGeoPoint geo_point_value = 90;
+    SegmentFieldRepeatedGeoPoint repeated_geo_point_value = 91;
+
+    SegmentFieldGeoRect geo_rect_value = 100;
+    SegmentFieldRepeatedGeoRect repeated_geo_rect_value = 101;
+  }
+}
+
+message LookupSegmentRequest {
+  string index = 1;
+  Lookup lookup = 2;
+}
+
+message LookupSegmentResponse {
+  repeated Segment results = 1;
+}
+
+message LookupSegmentKeyRequest {
+  string index = 1;
+  Lookup lookup = 2;
+}
+
+message LookupSegmentKeyResponse {
+  repeated SegmentField results = 1;
+}

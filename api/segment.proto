@@ -155,21 +155,3 @@ message DeleteSegmentRequest {
 message DeleteSegmentResponse {
   // Empty
 }
-
-message MatchSegmentRequest {
-  string index = 1;
-  repeated SegmentField fields = 2;
-}
-
-message MatchSegmentResponse {
-  repeated Segment results = 1;
-}
-
-message MatchSegmentKeyRequest {
-  string index = 1;
-  repeated SegmentField fields = 2;
-}
-
-message MatchSegmentKeyResponse {
-  repeated SegmentField results = 1;
-}
