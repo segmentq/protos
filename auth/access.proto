@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "github.com/segmentq/protos-auth-go/auth";
+
+message AccessDefinition {
+  string subject = 1;
+  string group = 2;
+  string domain = 3;
+}
+
+message GrantAccessRequest {
+  AccessDefinition definition = 1;
+}
+
+message GrantAccessResponse {
+  bool ok = 1;
+}
+
+message RevokeAccessRequest {
+  AccessDefinition definition = 1;
+}
+
+message RevokeAccessResponse {
+  bool ok = 1;
+}
+
+message ShowAccessRequest {
+  string subject = 1;
+  string group = 2;
+  string domain = 3;
+}
